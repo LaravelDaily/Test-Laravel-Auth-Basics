@@ -57,3 +57,14 @@ If the password is filled in, also update that.
 
 Test methods: `test_profile_name_email_update_successful()` and `test_profile_password_update_successful()`.
 
+---
+
+## Task 5. Email Verification.
+
+Make the URL `/secretpage` available only to those who verified their email.
+You need to make changes to two files.
+
+In file `routes/web.php` add a Middleware to `/secretpage` URL.
+And enable email verification in the `app/Models/User.php` file.
+
+Test method: `test_email_can_be_verified()`.

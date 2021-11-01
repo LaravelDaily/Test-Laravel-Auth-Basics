@@ -3,9 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Auth\Events\Verified;
 
 class AuthenticationTest extends TestCase
 {
@@ -77,5 +81,39 @@ class AuthenticationTest extends TestCase
             'email' => $user->email,
             'password' => 'newpassword'
         ]));
+    }
+
+    public function test_email_can_be_verified()
+    {
+        $newData = [
+            'name' => 'New name',
+            'email' => 'new@email.com',
+            'password' => 'newpassword',
+            'password_confirmation' => 'newpassword'
+        ];
+        $response = $this->post('/register', $newData);
+        $response->assertRedirect('/');
+
+        $response = $this->get('/secretpage');
+        $response->assertRedirect('/verify-email');
+
+        $user = User::factory()->create([
+            'email_verified_at' => null,
+        ]);
+
+        Event::fake();
+
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            ['id' => $user->id, 'hash' => sha1($user->email)]
+        );
+
+        $this->actingAs($user)->get($verificationUrl);
+        Event::assertDispatched(Verified::class);
+        $this->assertTrue($user->fresh()->hasVerifiedEmail());
+
+        $response = $this->get('/secretpage');
+        $response->assertOk();
     }
 }
