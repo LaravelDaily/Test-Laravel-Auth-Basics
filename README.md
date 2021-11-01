@@ -68,3 +68,14 @@ In file `routes/web.php` add a Middleware to `/secretpage` URL.
 And enable email verification in the `app/Models/User.php` file.
 
 Test method: `test_email_can_be_verified()`.
+
+---
+
+## Task 6. Password Confirmation.
+
+Make the URL `/verysecretpage` redirect to a page to re-enter their password once again.
+In file `routes/web.php` add a Middleware to that URL.
+
+Test method: `test_password_confirmation_page()`.
+
+---

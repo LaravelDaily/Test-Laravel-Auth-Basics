@@ -116,4 +116,18 @@ class AuthenticationTest extends TestCase
         $response = $this->get('/secretpage');
         $response->assertOk();
     }
+
+    public function test_password_confirmation_page()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get('/verysecretpage');
+        $response->assertRedirect('/confirm-password');
+
+        $response = $this->actingAs($user)->post('/confirm-password', [
+            'password' => 'password',
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHasNoErrors();
+    }
 }
