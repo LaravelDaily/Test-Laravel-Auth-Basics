@@ -1,30 +1,59 @@
-## Laravel Breeze: Tailwind Pages Skeleton
+## Test Your Laravel Auth Skills
 
-Laravel boilerplate repository to create simple demo-projects. It allows to quickly add new routes/pages, and has examples of a table page, and a form page.
+This repository is a test for you: perform a set of tasks listed below, and fix the PHPUnit tests, which are currently intentionally failing.
 
-It uses the Starter Kit [Laravel Breeze](https://github.com/laravel/breeze) based on Tailwind framework.
+To test if all the functions work correctly, there are PHPUnit tests in `tests/Feature/AuthenticationTest.php` file.
 
-![Laravel Breeze Table page](https://laraveldaily.com/wp-content/uploads/2021/09/Screenshot-2021-09-19-at-09.51.38.png)
+In the very beginning, if you run `php artisan test`, or `vendor/bin/phpunit`, all tests fail.
+Your task is to make those tests pass.
 
-![Laravel Breeze Form page](https://laraveldaily.com/wp-content/uploads/2021/09/Screenshot-2021-09-19-at-09.51.50.png)
 
------
+## How to Submit Your Solution
 
-### How to use
+If you want to submit your solution, you should make a Pull Request to the `main` branch.
+It will automatically run the tests via Github Actions and will show you/me if the test pass.
 
-- Clone the project with `git clone`
-- Copy `.env.example` file to `.env` and edit database credentials there
-- Run `composer install`
-- Run `php artisan key:generate`
-- Run `php artisan migrate --seed` (it has some seeded data for your testing)
-- That's it: launch the main URL
+If you don't know how to make a Pull Request, [here's my video with instructions](https://www.youtube.com/watch?v=vEcT6JIFji0).
 
+This task is mostly self-served, so I'm not planning review or merge the Pull Requests. This test is for yourselves to assess your skills, the automated tests will be your answer if you passed the test :)
+
+
+## Questions / Problems?
+
+If you're struggling with some of the tasks, or you have suggestions how to improve the task, create a Github Issue.
+
+Good luck!
 
 ---
 
-## More from our LaravelDaily Team
+## Task 1. Routes Protected by Auth.
 
-- Enroll in our [Laravel Online Courses](https://laraveldaily.teachable.com/)
-- Check out our adminpanel generator [QuickAdminPanel](https://quickadminpanel.com)
-- Purchase our [Livewire Kit](https://livewirekit.com)
-- Subscribe to our [YouTube channel Laravel Daily](https://www.youtube.com/channel/UCTuplgOBi6tJIlesIboymGA)
+File `routes/web.php`: profile functionality URLs should be available only for logged-in users.
+
+Test method `test_profile_routes_are_protected_from_public()`.
+
+---
+
+## Task 2. Link Visible to Logged-in Users.
+
+File `resources/views/layouts/navigation.blade.php`: the "Profile" link should be visible only to logged-in users.
+
+Test method `test_profile_link_is_invisible_in_public()`.
+
+---
+
+## Task 3. Profile Fields.
+
+File `resources/views/auth/profile.blade.php`: replace "???" values for name/email with logged-in user's name/email.
+
+Test method `test_profile_fields_are_visible()`.
+
+---
+
+## Task 4. Profile Update.
+
+File `app/Http/Controllers/ProfileController.php`: fill in the method `update()` with the code to update the user's name and email.
+If the password is filled in, also update that.
+
+Test methods: `test_profile_name_email_update_successful()` and `test_profile_password_update_successful()`.
+
