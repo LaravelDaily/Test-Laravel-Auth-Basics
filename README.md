@@ -79,3 +79,15 @@ In file `routes/web.php` add a Middleware to that URL.
 Test method: `test_password_confirmation_page()`.
 
 ---
+
+## Task 7. Password with Letters.
+
+By default, registration form requires password with at least 8 characters.
+Add a validation rule so that password must have at least one letter, no matter uppercase or lowercase.
+
+So password `12345678` is invalid, but password `a12345678` is valid.
+
+Hint: you need to modify file `app/Http/Controllers/Auth/RegisteredUserController.php`, which is almost default from Laravel Breeze.
+
+Test method: `test_password_at_least_one_uppercase_lowercase_letter()`.
+

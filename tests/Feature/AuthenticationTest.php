@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
@@ -129,5 +130,28 @@ class AuthenticationTest extends TestCase
 
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
+    }
+
+    public function test_password_at_least_one_uppercase_lowercase_letter()
+    {
+        $user = [
+            'name' => 'New name',
+            'email' => 'new@email.com',
+        ];
+
+        $invalidPassword = '12345678';
+        $validPassword = 'a12345678';
+
+        $this->post('/register', $user + [
+            'password' => $invalidPassword,
+            'password_confirmation' => $invalidPassword
+        ]);
+        $this->assertDatabaseMissing('users', $user);
+
+        $this->post('/register', $user + [
+                'password' => $validPassword,
+                'password_confirmation' => $validPassword
+            ]);
+        $this->assertDatabaseHas('users', $user);
     }
 }
