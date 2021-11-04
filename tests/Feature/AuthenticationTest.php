@@ -16,33 +16,33 @@ class AuthenticationTest extends TestCase
 
     public function test_profile_routes_are_protected_from_public(): void
     {
-        $response = $this->get('/profile');
+        $response = $this->get(route('profile.show'));
         $response->assertStatus(302);
-        $response->assertRedirect('login');
+        $response->assertRedirect(route('login'));
 
-        $response = $this->put('/profile');
+        $response = $this->put(route('profile.update'));
         $response->assertStatus(302);
-        $response->assertRedirect('login');
+        $response->assertRedirect(route('login'));
 
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/profile');
+        $response = $this->actingAs($user)->get(route('profile.show'));
         $response->assertOk();
     }
 
     public function test_profile_link_is_invisible_in_public(): void
     {
-        $response = $this->get('/');
+        $response = $this->get(route('home'));
         $this->assertStringNotContainsString('href="/profile"', $response->getContent());
 
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/');
+        $response = $this->actingAs($user)->get(route('home'));
         $this->assertStringContainsString('href="/profile"', $response->getContent());
     }
 
     public function test_profile_fields_are_visible(): void
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/profile');
+        $response = $this->actingAs($user)->get(route('profile.show'));
         $this->assertStringContainsString('value="' . $user->name . '"', $response->getContent());
         $this->assertStringContainsString('value="' . $user->email . '"', $response->getContent());
     }
@@ -54,7 +54,7 @@ class AuthenticationTest extends TestCase
             'name' => 'New name',
             'email' => 'new@email.com'
         ];
-        $this->actingAs($user)->put('/profile', $newData);
+        $this->actingAs($user)->put(route('profile.update'), $newData);
         $this->assertDatabaseHas('users', $newData);
 
         // Check if the user is still able to log in - password unchanged
@@ -73,7 +73,7 @@ class AuthenticationTest extends TestCase
             'password' => 'newpassword',
             'password_confirmation' => 'newpassword'
         ];
-        $this->actingAs($user)->put('/profile', $newData);
+        $this->actingAs($user)->put(route('profile.update'), $newData);
 
         // Check if the user is able to log in with the new password
         $this->assertTrue(Auth::attempt([
@@ -90,11 +90,11 @@ class AuthenticationTest extends TestCase
             'password' => 'newpassword',
             'password_confirmation' => 'newpassword'
         ];
-        $response = $this->post('/register', $newData);
+        $response = $this->post(route('register'), $newData);
         $response->assertRedirect('/');
 
-        $response = $this->get('/secretpage');
-        $response->assertRedirect('/verify-email');
+        $response = $this->get(route('secretpage'));
+        $response->assertRedirect(route('verification.notice'));
 
         $user = User::factory()->create([
             'email_verified_at' => null,
@@ -112,17 +112,17 @@ class AuthenticationTest extends TestCase
         Event::assertDispatched(Verified::class);
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
 
-        $response = $this->get('/secretpage');
+        $response = $this->get(route('secretpage'));
         $response->assertOk();
     }
 
     public function test_password_confirmation_page(): void
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/verysecretpage');
-        $response->assertRedirect('/confirm-password');
+        $response = $this->actingAs($user)->get(route('verysecretpage'));
+        $response->assertRedirect(route('password.confirm'));
 
-        $response = $this->actingAs($user)->post('/confirm-password', [
+        $response = $this->actingAs($user)->post(route('password.confirm.store'), [
             'password' => 'password',
         ]);
 
@@ -140,13 +140,13 @@ class AuthenticationTest extends TestCase
         $invalidPassword = '12345678';
         $validPassword = 'a12345678';
 
-        $this->post('/register', $user + [
+        $this->post(route('register'), $user + [
                 'password' => $invalidPassword,
                 'password_confirmation' => $invalidPassword
             ]);
         $this->assertDatabaseMissing('users', $user);
 
-        $this->post('/register', $user + [
+        $this->post(route('register'), $user + [
                 'password' => $validPassword,
                 'password_confirmation' => $validPassword
             ]);
