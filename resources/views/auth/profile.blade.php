@@ -14,7 +14,7 @@
 
                     <x-alert.success></x-alert.success>
 
-                    <form action="{{ route('profile.update') }}" method="POST">
+                    <form action="{{ route('profile.update')}}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -29,7 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="{{ auth()->user()->name }}"
                                      required />
                         </div>
 
@@ -40,7 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     value="{{ auth()->user()->email }}"
                                      required />
                         </div>
 
@@ -59,7 +59,8 @@
                             <x-input id="password_confirmation"
                                      class="block mt-1 w-full"
                                      type="password"
-                                     name="password_confirmation" />
+                                     name="password_confirmation"
+                                      />
                         </div>
 
                         <x-button class="mt-4">
