@@ -10,7 +10,6 @@ Route::get('/', function () {
 
 Route::get('users', [UserController::class, 'index'])->name('users.index');
 
-// Task: profile functionality should be available only for logged-in users
 Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
 Route::put('profile', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
 
