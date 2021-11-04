@@ -14,11 +14,13 @@ class ProfileController extends Controller
 
     public function update(ProfileUpdateRequest $request)
     {
-        auth()->user()->update($request->only('name', 'email'));
+        $updateFields = $request->only('name', 'email');
 
         if ($request->has('password')) {
-            auth()->user()->update(['password' => Hash::make($request->password)]);
+            $updateFields['password'] = Hash::make($request->password);
         }
+
+        auth()->user()->update($updateFields);
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
