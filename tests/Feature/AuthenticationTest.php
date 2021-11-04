@@ -76,7 +76,6 @@ class AuthenticationTest extends TestCase
             'password_confirmation' => 'newpassword'
         ];
         $this->actingAs($user)->put('/profile', $newData);
-
         // Check if the user is able to log in with the new password
         $this->assertTrue(Auth::attempt([
             'email' => $user->email,
