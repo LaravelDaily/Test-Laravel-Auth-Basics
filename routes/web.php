@@ -16,9 +16,6 @@ Route::put('profile', [ProfileController::class, 'update'])->middleware('auth')-
 
 Route::view('/secretpage', 'secretpage')->middleware('verified')->name('secretpage');
 
-// Task: this "/verysecretpage" URL should ask user for verifying their password once again
-// You need to add some middleware here
-Route::view('/verysecretpage', 'verysecretpage')
-     ->name('verysecretpage');
+Route::view('/verysecretpage', 'verysecretpage')->middleware('password.confirm')->name('verysecretpage');
 
 require __DIR__ . '/auth.php';
