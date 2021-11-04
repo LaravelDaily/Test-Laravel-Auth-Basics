@@ -16,7 +16,7 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_profile_routes_are_protected_from_public()
+    public function test_profile_routes_are_protected_from_public(): void
     {
         $response = $this->get('/profile');
         $response->assertStatus(302);
@@ -31,7 +31,7 @@ class AuthenticationTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_profile_link_is_invisible_in_public()
+    public function test_profile_link_is_invisible_in_public(): void
     {
         $response = $this->get('/');
         $this->assertStringNotContainsString('href="/profile"', $response->getContent());
@@ -41,7 +41,7 @@ class AuthenticationTest extends TestCase
         $this->assertStringContainsString('href="/profile"', $response->getContent());
     }
 
-    public function test_profile_fields_are_visible()
+    public function test_profile_fields_are_visible(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/profile');
@@ -49,7 +49,7 @@ class AuthenticationTest extends TestCase
         $this->assertStringContainsString('value="'.$user->email.'"', $response->getContent());
     }
 
-    public function test_profile_name_email_update_successful()
+    public function test_profile_name_email_update_successful(): void
     {
         $user = User::factory()->create();
         $newData = [
@@ -66,7 +66,7 @@ class AuthenticationTest extends TestCase
         ]));
     }
 
-    public function test_profile_password_update_successful()
+    public function test_profile_password_update_successful(): void
     {
         $user = User::factory()->create();
         $newData = [
@@ -84,7 +84,7 @@ class AuthenticationTest extends TestCase
         ]));
     }
 
-    public function test_email_can_be_verified()
+    public function test_email_can_be_verified(): void
     {
         $newData = [
             'name' => 'New name',
@@ -118,7 +118,7 @@ class AuthenticationTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_password_confirmation_page()
+    public function test_password_confirmation_page(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/verysecretpage');
@@ -132,7 +132,7 @@ class AuthenticationTest extends TestCase
         $response->assertSessionHasNoErrors();
     }
 
-    public function test_password_at_least_one_uppercase_lowercase_letter()
+    public function test_password_at_least_one_uppercase_lowercase_letter(): void
     {
         $user = [
             'name' => 'New name',
