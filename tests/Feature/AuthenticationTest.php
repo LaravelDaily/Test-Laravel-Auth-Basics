@@ -130,6 +130,7 @@ class AuthenticationTest extends TestCase
 
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
+
     }
 
     public function test_password_at_least_one_uppercase_lowercase_letter()
