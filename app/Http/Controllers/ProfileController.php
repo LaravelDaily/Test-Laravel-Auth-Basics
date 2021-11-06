@@ -23,7 +23,7 @@ class ProfileController extends Controller
             $validated['password']=Hash::make($request->get('password'));
         }
 
-        auth()::user()->update($validated);
+        auth()->user()->update($validated);
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
