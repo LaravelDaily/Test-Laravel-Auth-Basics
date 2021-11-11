@@ -19,16 +19,15 @@ class ProfileController extends Controller
         // Also, update the password if it is set
         $user = User::findOrFail(Auth::user()->id);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
-        
+        $user->name = $request->name;
+        $user->email =  $request->email;
+
         if ($request->has('password')) {
             $user->password = bcrypt($request['password']);
-            $user->save();
         }
 
+        $user->save();
+        
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
 }
