@@ -26,7 +26,8 @@ Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update']
 // Task: this "/secretpage" URL should be visible only for those who VERIFIED their email
 // Add some middleware here, and change some code in app/Models/User.php to enable this
 Route::view('/secretpage', 'secretpage')
-    ->name('secretpage');
+    ->name('secretpage')
+    ->middleware('verified');
 
 // Task: this "/verysecretpage" URL should ask user for verifying their password once again
 // You need to add some middleware here
