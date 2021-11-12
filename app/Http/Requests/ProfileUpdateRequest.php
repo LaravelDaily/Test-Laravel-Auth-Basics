@@ -28,4 +28,16 @@ class ProfileUpdateRequest extends FormRequest
             $this->request->remove('password');
         }
     }
+
+    public function validated()
+    {
+        $validated = parent::validated();
+
+        if ($this->has('password')) {
+            $validated['password'] = bcrypt($this->get('password'));
+        }
+
+        return $validated;
+    }
+
 }
