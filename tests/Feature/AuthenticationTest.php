@@ -11,11 +11,11 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Testing\Fluent\Concerns\Debugging;
 
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
-
     public function test_profile_routes_are_protected_from_public()
     {
         $response = $this->get('/profile');
@@ -54,7 +54,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create();
         $newData = [
             'name' => 'New name',
-            'email' => 'new@email.com'
+            'email' => 'new@email.com',
         ];
         $this->actingAs($user)->put('/profile', $newData);
         $this->assertDatabaseHas('users', $newData);
@@ -76,7 +76,6 @@ class AuthenticationTest extends TestCase
             'password_confirmation' => 'newpassword'
         ];
         $this->actingAs($user)->put('/profile', $newData);
-
         // Check if the user is able to log in with the new password
         $this->assertTrue(Auth::attempt([
             'email' => $user->email,
