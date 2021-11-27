@@ -9,9 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rules;
-use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class RegisteredUserController extends Controller
 {
