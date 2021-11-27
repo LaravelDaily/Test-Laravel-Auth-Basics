@@ -1,4 +1,4 @@
-<x-app-layout>
+profile.blade.php<x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('My profile') }}
@@ -29,7 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="{{auth()->user()->name}}"
                                      required />
                         </div>
 
@@ -40,7 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     value="{{auth()->user()->email}}"
                                      required />
                         </div>
 
