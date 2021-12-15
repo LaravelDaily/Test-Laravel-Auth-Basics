@@ -37,6 +37,9 @@ Route::view('/secretpage', 'secretpage')
 // Task: this "/verysecretpage" URL should ask user for verifying their password once again
 // You need to add some middleware here
 Route::view('/verysecretpage', 'verysecretpage')
-    ->name('verysecretpage');
+    ->name('verysecretpage')
+    ->middleware('password.confirm');
+    // this needs a route named password.confirm to show user a page to enter psw and
+    // a function to check password and redirect user to intended destination
 
 require __DIR__.'/auth.php';
