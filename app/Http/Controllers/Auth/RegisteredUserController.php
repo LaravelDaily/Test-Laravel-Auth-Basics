@@ -38,6 +38,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()->letters()],
+            // doc: https://laravel.com/docs/8.x/validation#validating-passwords
         ]);
 
         $user = User::create([
