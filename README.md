@@ -33,7 +33,7 @@ File `routes/web.php`: profile functionality URLs should be available only for l
 Test method `test_profile_routes_are_protected_from_public()`.
 
 ---
-
+    
 ## Task 2. Link Visible to Logged-in Users.
 
 File `resources/views/layouts/navigation.blade.php`: the "Profile" link should be visible only to logged-in users.
