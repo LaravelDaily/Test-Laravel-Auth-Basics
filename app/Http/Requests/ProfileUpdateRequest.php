@@ -8,6 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileUpdateRequest extends FormRequest
 {
+
     public function rules()
     {
         return [
