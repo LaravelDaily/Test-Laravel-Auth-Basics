@@ -20,13 +20,13 @@ class ProfileController extends Controller
         
 
         if ($request->has('password')) {
-            ($user->update(
+            $user->update(
                 [
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => bcrypt($request->password)
                 ]
-            ));
+            );
         }
 
         $user->update(
