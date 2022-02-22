@@ -30,6 +30,6 @@ class ProfileController extends Controller
 
         User::where( 'email' ,$request->email)->update($data);
 
-        return redirect()->route('profile.show')->with('success', 'Profile updated.');
+        return redirect()->route('profile.update')->with('success', 'Profile updated.');
     }
 }
