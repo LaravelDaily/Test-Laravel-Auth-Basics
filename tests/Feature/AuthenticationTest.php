@@ -18,8 +18,6 @@ class AuthenticationTest extends TestCase
 
     public function test_profile_routes_are_protected_from_public()
     {
-        // $this->withoutExceptionHandling();
-
         $response = $this->get('/profile');
         $response->assertStatus(302);
         $response->assertRedirect('login');
@@ -45,8 +43,6 @@ class AuthenticationTest extends TestCase
 
     public function test_profile_fields_are_visible()
     {
-        $this->withoutExceptionHandling();
-
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/profile');
         $this->assertStringContainsString('value="'.$user->name.'"', $response->getContent());
