@@ -23,8 +23,10 @@ class ProfileController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
 
-            if (isset($request->password)) {
-                $user->password = Hash::make($request->password);
+            if ($request->has('password')) {
+                $user->update([
+                    'password' => Hash::make($request->password)
+                ]);
             }
             $user->update();
         } catch (Exception $error) {
