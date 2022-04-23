@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +36,27 @@ Route::group(['middleware'=>'verified'],function(){
 
 // Task: this "/verysecretpage" URL should ask user for verifying their password once again
 // You need to add some middleware here
-Route::view('/verysecretpage', 'verysecretpage')
-    ->name('verysecretpage');
+Route::group(['middleware' => 'password.confirm'],function(){
+    Route::view('/verysecretpage', 'verysecretpage')->name('verysecretpage');
+});
+
+
+//The Password Confirmation Form
+Route::get('/confirm-password', function () {
+    return view('auth.confirm-password');
+})->middleware('auth')->name('password.confirm');
+//Confirming The Password
+
+Route::post('/confirm-password', function (Request $request) {
+    if (! Hash::check($request->password, $request->user()->password)) {
+        return back()->withErrors([
+            'password' => ['The provided password does not match our records.']
+        ]);
+    }
+ 
+    $request->session()->passwordConfirmed();
+ 
+    return redirect()->intended();
+})->middleware(['auth', 'throttle:6,1']);
 
 require __DIR__.'/auth.php';
