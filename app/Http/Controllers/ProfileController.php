@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -22,7 +22,7 @@ class ProfileController extends Controller
         $user->email = $request->email;
 
         if($request->password) {
-            $user->password = Hash::make($request->passwprd);
+            $user->password = Hash::make($request->password);
         }
         $user->save();
 
