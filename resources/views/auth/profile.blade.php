@@ -26,40 +26,40 @@
 
                             {{-- Task: replace ??? for name/email with logged in user's name/email --}}
                             <x-input id="name"
-                                     class="block mt-1 w-full"
-                                     type="text"
-                                     name="name"
-                                     value="???"
-                                     required />
+                                    class="block mt-1 w-full"
+                                    type="text"
+                                    name="name"
+                                    value="{{ auth()->user()->name }}"
+                                    required />
                         </div>
 
                         <div class="mt-4">
                             <x-label for="email" :value="__('Email')"/>
 
                             <x-input id="email"
-                                     class="block mt-1 w-full"
-                                     type="email"
-                                     name="email"
-                                     value="???"
-                                     required />
+                                    class="block mt-1 w-full"
+                                    type="email"
+                                    name="email"
+                                    value="{{ auth()->user()->email }}"
+                                    required />
                         </div>
 
                         <div class="mt-4">
                             <x-label for="password" :value="__('New password (if you want to change it)')"/>
 
                             <x-input id="password"
-                                     class="block mt-1 w-full"
-                                     type="password"
-                                     name="password" />
+                                    class="block mt-1 w-full"
+                                    type="password"
+                                    name="password" />
                         </div>
 
                         <div class="mt-4">
                             <x-label for="password_confirmation" :value="__('New password confirmation')"/>
 
                             <x-input id="password_confirmation"
-                                     class="block mt-1 w-full"
-                                     type="password"
-                                     name="password_confirmation" />
+                                    class="block mt-1 w-full"
+                                    type="password"
+                                    name="password_confirmation" />
                         </div>
 
                         <x-button class="mt-4">
