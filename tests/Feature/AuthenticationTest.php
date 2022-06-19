@@ -61,7 +61,7 @@ class AuthenticationTest extends TestCase
 
         // Check if the user is still able to log in - password unchanged
         $this->assertTrue(Auth::attempt([
-            'email' => $user->email,
+            'email' => $newData['email'],
             'password' => 'password'
         ]));
     }
@@ -79,7 +79,7 @@ class AuthenticationTest extends TestCase
 
         // Check if the user is able to log in with the new password
         $this->assertTrue(Auth::attempt([
-            'email' => $user->email,
+            'email' => $newData['email'],
             'password' => 'newpassword'
         ]));
     }
