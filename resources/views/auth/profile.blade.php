@@ -26,14 +26,14 @@
 
                             {{-- Task: replace ??? for name/email with logged in user's name/email --}}
                             <x-input id="name" class="block mt-1 w-full" type="text" name="name" {{-- value="???" --}}
-                                value="{{ Auth::user()->name }}" required />
+                                value="{{auth()->user()->name}}" required />
                         </div>
 
                         <div class="mt-4">
                             <x-label for="email" :value="__('Email')" />
 
                             <x-input id="email" class="block mt-1 w-full" type="email" name="email"
-                                value="{{ Auth::user()->email }" required />
+                                value="{{auth()->user()->email}}" required />
                         </div>
 
                         <div class="mt-4">
