@@ -20,7 +20,7 @@
 
                         <div>
                             <em><b>Task:</b> replace ??? for name/email with logged in user's name/email</em>
-                            <br /><br />
+                            <br/><br/>
 
                             <x-label for="name" :value="__('Name')"/>
 
@@ -29,8 +29,14 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
-                                     required />
+                                     @auth
+                                         value="{{ auth()->user()->name ?? ""}}"
+                                        value="{{ auth()->user()->email ?? ""}}"
+                                     @elseguest
+                                         value="???"
+                                     @endauth
+                                     required
+                            />
                         </div>
 
                         <div class="mt-4">
@@ -41,7 +47,7 @@
                                      type="email"
                                      name="email"
                                      value="???"
-                                     required />
+                                     required/>
                         </div>
 
                         <div class="mt-4">
@@ -50,7 +56,7 @@
                             <x-input id="password"
                                      class="block mt-1 w-full"
                                      type="password"
-                                     name="password" />
+                                     name="password"/>
                         </div>
 
                         <div class="mt-4">
@@ -59,7 +65,7 @@
                             <x-input id="password_confirmation"
                                      class="block mt-1 w-full"
                                      type="password"
-                                     name="password_confirmation" />
+                                     name="password_confirmation"/>
                         </div>
 
                         <x-button class="mt-4">
