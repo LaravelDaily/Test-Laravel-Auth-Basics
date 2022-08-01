@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
 
 class ProfileController extends Controller
 {
@@ -11,10 +12,15 @@ class ProfileController extends Controller
         return view('auth.profile');
     }
 
-    public function update(ProfileUpdateRequest $request)
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
+        $data = $request->validated();
+        if(array_key_exists('password',$data)){
+            $data['password'] = bcrypt($data['password']);
+        }
+        auth()->user()->update($data);
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
