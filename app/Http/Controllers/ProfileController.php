@@ -18,16 +18,22 @@ class ProfileController extends Controller
     {
         // Task: fill in the code here to update name and email
 
-        $formFields = [
+/*        $formFields = [
           'name' => $request->name,
           'email' => $request->email,
-        ];
+        ];*/
 
-        if ($request->has('password')){
-            auth()->user()->update([
-               'password' => Has::make($request->input('password'))
-            ]);
+        $formFields = $request->validated();
+        $user = auth()->user();
+
+        $user->name = $formFields['name'];
+        $user->email = $formFields['email'];
+
+        if (isset($formFields['password'])){
+            $user->password = bcrypt($formFields['password']);
         }
+
+        $user->save();
 
         // Also, update the password if it is set
 
