@@ -15,10 +15,12 @@
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}
                     </x-nav-link>
-                    {{-- Task: this "Profile" link should be visible only to logged-in users --}}
-                    <x-nav-link href="/profile" :active="request()->routeIs('profile.show')">
-                        {{ __('Profile') }}
-                    </x-nav-link>
+                    @auth
+                        {{-- Task: this "Profile" link should be visible only to logged-in users --}}
+                        <x-nav-link href="/profile" :active="request()->routeIs('profile.show')">
+                            {{ __('Profile') }}
+                        </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
