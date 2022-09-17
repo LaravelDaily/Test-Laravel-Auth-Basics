@@ -26,7 +26,7 @@ Good luck!
 
 ---
 
-## Task 1. Routes Protected by Auth.
+## Task 1. Routes Protected by Auth. [x]
 
 File `routes/web.php`: profile functionality URLs should be available only for logged-in users.
 
@@ -34,7 +34,7 @@ Test method `test_profile_routes_are_protected_from_public()`.
 
 ---
 
-## Task 2. Link Visible to Logged-in Users.
+## Task 2. Link Visible to Logged-in Users. [x]
 
 File `resources/views/layouts/navigation.blade.php`: the "Profile" link should be visible only to logged-in users.
 
@@ -42,7 +42,7 @@ Test method `test_profile_link_is_invisible_in_public()`.
 
 ---
 
-## Task 3. Profile Fields.
+## Task 3. Profile Fields. [x]
 
 File `resources/views/auth/profile.blade.php`: replace "???" values for name/email with logged-in user's name/email.
 
@@ -50,7 +50,7 @@ Test method `test_profile_fields_are_visible()`.
 
 ---
 
-## Task 4. Profile Update.
+## Task 4. Profile Update. [x]
 
 File `app/Http/Controllers/ProfileController.php`: fill in the method `update()` with the code to update the user's name and email.
 If the password is filled in, also update that.
@@ -71,7 +71,7 @@ Test method: `test_email_can_be_verified()`.
 
 ---
 
-## Task 6. Password Confirmation.
+## Task 6. Password Confirmation. [x]
 
 Make the URL `/verysecretpage` redirect to a page to re-enter their password once again.
 In file `routes/web.php` add a Middleware to that URL.
@@ -80,7 +80,7 @@ Test method: `test_password_confirmation_page()`.
 
 ---
 
-## Task 7. Password with Letters.
+## Task 7. Password with Letters. [x]
 
 By default, registration form requires password with at least 8 characters.
 Add a validation rule so that password must have at least one letter, no matter uppercase or lowercase.
