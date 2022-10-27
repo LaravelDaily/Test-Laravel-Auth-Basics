@@ -17,7 +17,7 @@ class ProfileController extends Controller
     {
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
-        $user = User::query()
+        $user = User::find(auth()->id())
             ->update([
                 'name' => $request->name,
                 'email' => $request->email,
