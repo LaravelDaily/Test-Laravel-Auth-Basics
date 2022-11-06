@@ -23,6 +23,8 @@ class ProfileController extends Controller
         
        
 
-        return redirect()->route('profile.show')->with('success', 'Profile updated.');
+        return redirect()
+            ->route('profile.show')
+            ->with('success', 'Profile updated.');
     }
 }
