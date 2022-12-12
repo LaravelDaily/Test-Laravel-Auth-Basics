@@ -20,8 +20,8 @@ Route::get('/', function () {
 Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
 // Task: profile functionality should be available only for logged-in users
-Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show')->middleware(['authenticate']);
+Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update')->middleware(['authenticate']);
 
 // Task: this "/secretpage" URL should be visible only for those who VERIFIED their email
 // Add some middleware here, and change some code in app/Models/User.php to enable this
