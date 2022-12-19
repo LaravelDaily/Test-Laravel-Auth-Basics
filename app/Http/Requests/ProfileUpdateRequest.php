@@ -27,5 +27,8 @@ class ProfileUpdateRequest extends FormRequest
         if ($this->password == null) {
             $this->request->remove('password');
         }
+        return $this->merge([
+            'password' => $this->password,
+        ]);
     }
 }
