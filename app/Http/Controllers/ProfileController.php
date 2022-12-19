@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Support\Facades\Hash;
-
 
 
 class ProfileController extends Controller
@@ -19,8 +17,8 @@ class ProfileController extends Controller
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
         auth()->user()->update($request->only('name', 'email'));
-        if ($request->input('password')) {
-            auth()->user()->update(Hash::make($request->password));
+        if ($request->password) {
+            auth()->user()->update(bcrypt($request->password));
         }
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
