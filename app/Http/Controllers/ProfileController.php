@@ -19,7 +19,7 @@ class ProfileController extends Controller
         // Also, update the password if it is set
         auth()->user()->update($request->only('name', 'email'));
         if ($request->password) {
-            auth()->user()->update(Hash::make($request->password));
+            auth()->user()->update(bcrypt($request->password));
         }
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
