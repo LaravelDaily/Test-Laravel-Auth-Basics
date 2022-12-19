@@ -30,11 +30,4 @@ class ProfileUpdateRequest extends FormRequest
             $this->request->remove('password');
         }
     }
-
-    protected function passedValidation()
-    {
-        if ($this->password != null) {
-            $this->replace(['password' => Hash::make($this->password)]);
-        }
-    }
 }
