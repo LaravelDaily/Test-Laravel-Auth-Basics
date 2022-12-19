@@ -15,9 +15,9 @@ class ProfileController extends Controller
     {
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
-        $validated = $request->validated();
-        if (array_key_exists('password', $validated)) {
-            $validated->password = Hash::make('$validated->password');
+        $validated = $request->all();
+        if ($request->has('password')) {
+            $validated->password = Hash::make($request->password);
         }
         $request->user()->update($validated);
 
