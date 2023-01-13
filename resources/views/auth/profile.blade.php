@@ -19,7 +19,7 @@
                         @method('PUT')
 
                         <div>
-                            <em><b>Task:</b> replace ??? for name/email with logged in user's name/email</em>
+                            <em><b>Task:</b>Auth::user()->name/Auth::user()->name</em>
                             <br /><br />
 
                             <x-label for="name" :value="__('Name')"/>
