@@ -30,7 +30,7 @@ class AuthenticationTest extends TestCase
         $response = $this->actingAs($user)->get('/profile');
         $response->assertOk();
     }
-
+    
     public function test_profile_link_is_invisible_in_public()
     {
         $response = $this->get('/');
@@ -40,7 +40,7 @@ class AuthenticationTest extends TestCase
         $response = $this->actingAs($user)->get('/');
         $this->assertStringContainsString('href="/profile"', $response->getContent());
     }
-
+    
     public function test_profile_fields_are_visible()
     {
         $user = User::factory()->create();
@@ -48,7 +48,7 @@ class AuthenticationTest extends TestCase
         $this->assertStringContainsString('value="'.$user->name.'"', $response->getContent());
         $this->assertStringContainsString('value="'.$user->email.'"', $response->getContent());
     }
-
+    
     public function test_profile_name_email_update_successful()
     {
         $user = User::factory()->create();
@@ -65,7 +65,7 @@ class AuthenticationTest extends TestCase
             'password' => 'password'
         ]));
     }
-
+    
     public function test_profile_password_update_successful()
     {
         $user = User::factory()->create();
@@ -83,7 +83,7 @@ class AuthenticationTest extends TestCase
             'password' => 'newpassword'
         ]));
     }
-
+    
     public function test_email_can_be_verified()
     {
         $newData = [
@@ -117,7 +117,7 @@ class AuthenticationTest extends TestCase
         $response = $this->get('/secretpage');
         $response->assertOk();
     }
-
+    
     public function test_password_confirmation_page()
     {
         $user = User::factory()->create();
@@ -131,7 +131,7 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
     }
-
+    
     public function test_password_at_least_one_uppercase_lowercase_letter()
     {
         $user = [
