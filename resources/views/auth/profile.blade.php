@@ -19,9 +19,6 @@
                         @method('PUT')
 
                         <div>
-                            <em><b>Task:</b> replace ??? for name/email with logged in user's name/email</em>
-                            <br /><br />
-
                             <x-label for="name" :value="__('Name')"/>
 
                             {{-- Task: replace ??? for name/email with logged in user's name/email --}}
