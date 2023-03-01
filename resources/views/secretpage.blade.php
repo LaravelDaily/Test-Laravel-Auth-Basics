@@ -1,4 +1,7 @@
 <x-app-layout>
+        <div class="alert alert-success" role="alert">
+            Your email is verified. You can now access the secret page.
+        </div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Secret page') }}

@@ -22,9 +22,9 @@ class ProfileUpdateRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
-        if ($this->password == null) {
+        if ($this->password === null) {
             $this->request->remove('password');
         }
     }
