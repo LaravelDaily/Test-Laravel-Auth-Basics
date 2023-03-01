@@ -57,6 +57,7 @@ class AuthenticationTest extends TestCase
             'email' => 'new@email.com'
         ];
         $this->actingAs($user)->put('/profile', $newData);
+
         $this->assertDatabaseHas('users', $newData);
 
         // Check if the user is still able to log in - password unchanged
