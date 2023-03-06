@@ -24,7 +24,7 @@ class ProfileUpdateRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if ($this->password == null) {
+        if ($this->password === null) {
             $this->request->remove('password');
         }
     }
