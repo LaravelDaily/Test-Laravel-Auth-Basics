@@ -33,8 +33,10 @@ Route::middleware('auth')->group(function () {
 
 // Task: this "/verysecretpage" URL should ask user for verifying their password once again
 // You need to add some middleware here
-    Route::view('/verysecretpage', 'verysecretpage')
-        ->name('verysecretpage');
+    Route::middleware('password.confirm')->group(function () {
+        Route::view('/verysecretpage', 'verysecretpage')
+            ->name('verysecretpage');
+    });
 });
 
 require __DIR__.'/auth.php';
