@@ -30,12 +30,12 @@ Route::group(['middleware' => 'auth'] , function () {
 // Add some middleware here, and change some code in app/Models/User.php to enable this
 Route::view('/secretpage', 'secretpage')
     ->name('secretpage')
-    ->middleware('auth')->name('verified');
+    ->middleware(['auth' , 'verified']);
 
 // Task: this "/verysecretpage" URL should ask user for verifying their password once again
 // You need to add some middleware here
 Route::view('/verysecretpage', 'verysecretpage')
     ->name('verysecretpage')
-    ->middleware('auth')->name('password.confirm');
+    ->middleware('password.confirm');
 
 require __DIR__.'/auth.php';
