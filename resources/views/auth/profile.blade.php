@@ -29,9 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="
-                                     @auth {{ auth()->user->name }} @endauth 
-                                     @guest {{ ??? }} @endguest"
+                                     value="{{ auth()->user->name }}"
                                      required />
                         </div>
 
@@ -42,9 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="
-                                     @auth {{ auth()->user->email }} @endauth 
-                                     @guest {{ ??? }} @endguest"
+                                     value="{{ auth()->user->email }}"
                                      required />
                         </div>
 
