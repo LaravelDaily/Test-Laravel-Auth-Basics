@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Http\Controllers\Hash;
-
+use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     public function show()
