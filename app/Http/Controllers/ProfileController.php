@@ -22,7 +22,7 @@ class ProfileController extends Controller
         if($request['password']){
             $user->password = bcrypt($request['password']);
         }
-        $user->save();
+        auth()->user()->update($user);
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
 }
