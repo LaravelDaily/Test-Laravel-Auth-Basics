@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -22,7 +23,7 @@ class ProfileController extends Controller
         if($request['password']){
             $user->password = bcrypt($request['password']);
         }
-        auth()->user()->update($user);
+        Auth::user()->save();
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
 }
