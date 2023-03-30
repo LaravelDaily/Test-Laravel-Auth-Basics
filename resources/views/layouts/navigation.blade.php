@@ -16,11 +16,11 @@
                         {{ __('Users') }}
                     </x-nav-link>
                     {{-- Task: this "Profile" link should be visible only to logged-in users --}}
-                    @if(Auth::user())
+                    @auth
                     <x-nav-link href="/profile" :active="request()->routeIs('profile.show')">
                         {{ __('Profile') }}
                     </x-nav-link>
-                    @endif
+                    @endauth
                 </div>
             </div>
 
