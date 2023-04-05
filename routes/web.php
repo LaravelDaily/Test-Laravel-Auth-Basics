@@ -35,4 +35,8 @@ Route::view('/secretpage', 'secretpage')
 Route::view('/verysecretpage', 'verysecretpage')
     ->name('verysecretpage');
 
+Route::get('/test', function() {
+    dd(auth()->user());
+});
+
 require __DIR__.'/auth.php';
