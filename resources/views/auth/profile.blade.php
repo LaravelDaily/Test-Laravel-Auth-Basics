@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <x-validation-errors class="mb-4" :errors="$errors"/>
+                    <x-validation-errors class="mb-4" :errors="$errors" />
 
                     <x-alert.success></x-alert.success>
 
@@ -18,48 +18,38 @@
                         @csrf
                         @method('PUT')
 
-                        <div>
-                            <em><b>Task:</b> replace ??? for name/email with logged in user's name/email</em>
-                            <br /><br />
 
-                            <x-label for="name" :value="__('Name')"/>
+                        @auth
+                            <div>
+                                <em><b>Task:</b> replace ??? for name/email with logged in user's name/email</em>
+                                <br /><br />
 
-                            {{-- Task: replace ??? for name/email with logged in user's name/email --}}
-                            <x-input id="name"
-                                     class="block mt-1 w-full"
-                                     type="text"
-                                     name="name"
-                                     value="???"
-                                     required />
+                                <x-label for="name" :value="__('Name')" />
+                                {{-- Task: replace ??? for name/email with logged in user's name/email --}}
+                                <x-input id="name" class="block mt-1 w-full" type="text" name="name"
+                                    value="{{ Auth::user()->name }}" required />
+                            </div>
+
+                            <div class="mt-4">
+                                <x-label for="email" :value="__('Email')" />
+
+                                <x-input id="email" class="block mt-1 w-full" type="email" name="email"
+                                    value="{{ Auth::user()->email }}" required />
+                            </div>
+
+                        @endauth
+
+                        <div class="mt-4">
+                            <x-label for="password" :value="__('New password (if you want to change it)')" />
+
+                            <x-input id="password" class="block mt-1 w-full" type="password" name="password" />
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="email" :value="__('Email')"/>
+                            <x-label for="password_confirmation" :value="__('New password confirmation')" />
 
-                            <x-input id="email"
-                                     class="block mt-1 w-full"
-                                     type="email"
-                                     name="email"
-                                     value="???"
-                                     required />
-                        </div>
-
-                        <div class="mt-4">
-                            <x-label for="password" :value="__('New password (if you want to change it)')"/>
-
-                            <x-input id="password"
-                                     class="block mt-1 w-full"
-                                     type="password"
-                                     name="password" />
-                        </div>
-
-                        <div class="mt-4">
-                            <x-label for="password_confirmation" :value="__('New password confirmation')"/>
-
-                            <x-input id="password_confirmation"
-                                     class="block mt-1 w-full"
-                                     type="password"
-                                     name="password_confirmation" />
+                            <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                                name="password_confirmation" />
                         </div>
 
                         <x-button class="mt-4">
