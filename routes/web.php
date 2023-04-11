@@ -27,9 +27,9 @@ Route::middleware('auth')->group(function () {
 
 // Task: this "/secretpage" URL should be visible only for those who VERIFIED their email
 // Add some middleware here, and change some code in app/Models/User.php to enable this
-Route::get('/secretpage', function () {
-    return view('secretpage');
-})->middleware(['email', 'verified'])->name('secretpage');
+Route::view('/secretpage', 'secretpage')
+    ->middleware(['email', 'verified'])
+    ->name('secretpage');
 
 // Task: this "/verysecretpage" URL should ask user for verifying their password once again
 // You need to add some middleware here
