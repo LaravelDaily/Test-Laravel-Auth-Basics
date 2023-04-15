@@ -25,7 +25,6 @@
                             <x-label for="name" :value="__('Name')"/>
 
                             {{-- Task: replace ??? for name/email with logged in user's name/email --}}
-                            {{ Auth::user()->name }}
                             <x-input id="name"
                                      class="block mt-1 w-full"
                                      type="text"
