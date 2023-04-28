@@ -35,9 +35,9 @@ class RegisteredUserController extends Controller
     {
         // Task: change validation rule to include at least one letter
         $request->validate([
-            'name' => ['required', 'string', 'max:255','regex:/^(?=.*?[A-Za-z])/'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required','regex:/^(?=.*?[A-Za-z])(?=.*?[a-z])(?=.*?[A-Z])/', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
