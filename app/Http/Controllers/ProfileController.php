@@ -19,13 +19,11 @@ class ProfileController extends Controller
         $validatedData = $request->validated();
 
         if ($validatedData['password']) {
-            $request->user()->fill($validatedData['password']);
-
+            $request->user()->fill($validatedData);
             $request->user()->save();
         }
 
         $request->user()->fill($validatedData);
-
         $request->user()->save();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
