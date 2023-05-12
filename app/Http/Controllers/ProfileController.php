@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -18,12 +17,12 @@ class ProfileController extends Controller
         // Also, update the password if it is set
         $validatedData = $request->validated();
 
-        if ($validatedData['password']) {
-            $request->user()->fill($validatedData);
-            $request->user()->save();
+        $request->user()->fill($validatedData);
+
+        if ($request->has('password')) {
+            $request->user()->password = Hash::make($request->password);
         }
 
-        $request->user()->fill($validatedData);
         $request->user()->save();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
