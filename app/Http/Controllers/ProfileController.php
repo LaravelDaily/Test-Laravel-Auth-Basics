@@ -16,7 +16,15 @@ class ProfileController extends Controller
     {
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
-        $request->user()->fill($request->validated());
+        $validatedData = $request->validated()
+
+        if ($validatedData['password']) {
+            $request->user()->fill($validatedData['password']);
+    
+            $request->user()->save();
+        }
+
+        $request->user()->fill($validatedData);
 
         $request->user()->save();
 
