@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileUpdateRequest extends FormRequest
 {
@@ -28,4 +29,13 @@ class ProfileUpdateRequest extends FormRequest
             $this->request->remove('password');
         }
     }
+
+    protected function passedValidation(): void
+    {
+        if ($this->password) {
+            $this->merge([
+                'password' => Hash::make($this->password)
+            ]);
+        }
+    }   
 }
