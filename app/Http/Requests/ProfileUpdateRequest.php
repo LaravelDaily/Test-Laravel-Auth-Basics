@@ -28,4 +28,5 @@ class ProfileUpdateRequest extends FormRequest
             $this->request->remove('password');
         }
     }
+
 }
