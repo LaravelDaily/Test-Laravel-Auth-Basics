@@ -17,8 +17,8 @@ class ProfileController extends Controller
         // Also, update the password if it is set
         $data = $request->validated();
 
-        if ($request->validated('password')) {
-            $data['password'] = bcrypt($request->validated('password'));
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($data['password']);
         }
 
         auth()->user()->update($data);
