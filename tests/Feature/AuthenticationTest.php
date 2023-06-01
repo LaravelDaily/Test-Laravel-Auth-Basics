@@ -98,25 +98,25 @@ class AuthenticationTest extends TestCase
 
         $response = $this->get('/secretpage');
         $response->assertRedirect('/verify-email');
-//
-//        $user = User::factory()->create([
-//            'email_verified_at' => null,
-//        ]);
-//
-//        Event::fake();
-//
-//        $verificationUrl = URL::temporarySignedRoute(
-//            'verification.verify',
-//            now()->addMinutes(60),
-//            ['id' => $user->id, 'hash' => sha1($user->email)]
-//        );
-//
-//        $this->actingAs($user)->get($verificationUrl);
-//        Event::assertDispatched(Verified::class);
-//        $this->assertTrue($user->fresh()->hasVerifiedEmail());
-//
-//        $response = $this->get('/secretpage');
-//        $response->assertOk();
+
+        $user = User::factory()->create([
+            'email_verified_at' => null,
+        ]);
+
+        Event::fake();
+
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            ['id' => $user->id, 'hash' => sha1($user->email)]
+        );
+
+        $this->actingAs($user)->get($verificationUrl);
+        Event::assertDispatched(Verified::class);
+        $this->assertTrue($user->fresh()->hasVerifiedEmail());
+
+        $response = $this->get('/secretpage');
+        $response->assertOk();
     }
 
     public function test_password_confirmation_page()
