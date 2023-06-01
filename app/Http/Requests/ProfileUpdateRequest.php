@@ -13,7 +13,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users')->ignore(Auth::user())],
-            'password' => ['sometimes', 'required_with:old_password', 'string', 'confirmed', 'min:8'],
+            'password' => ['sometimes', 'required_with:old_password', 'string', 'confirmed', 'min:8']
         ];
     }
 
@@ -24,8 +24,21 @@ class ProfileUpdateRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if ($this->password == null) {
+        if ($this->password === null) {
             $this->request->remove('password');
+        }
+    }
+    /**
+     * Handle a passed validation attempt.
+     */
+    protected function passedValidation(): void
+    {
+        if ($this->password !== null) {
+            $this->replace([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => bcrypt($this->password)
+            ]);
         }
     }
 }

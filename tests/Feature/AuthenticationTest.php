@@ -86,6 +86,7 @@ class AuthenticationTest extends TestCase
 
     public function test_email_can_be_verified()
     {
+        $this->withoutExceptionHandling();
         $newData = [
             'name' => 'New name',
             'email' => 'new@email.com',
