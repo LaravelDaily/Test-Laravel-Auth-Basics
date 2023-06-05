@@ -19,7 +19,6 @@
                         @method('PUT')
 
                         <div>
-                            <em><b>Task:</b> replace ??? for name/email with logged in user's name/email</em>
                             <br /><br />
 
                             <x-label for="name" :value="__('Name')"/>
@@ -29,7 +28,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="{{ auth()->user()->name }}"
                                      required />
                         </div>
 
@@ -40,7 +39,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     value="{{ auth()->user()->email }}"
                                      required />
                         </div>
 
