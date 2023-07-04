@@ -4,7 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="flex flex-shrink-0 items-center">
+                <div class="flex items-center flex-shrink-0">
                     <a href="{{ route('home') }}">
                         <x-application-logo class="block w-auto h-10 text-gray-600 fill-current"/>
                     </a>
@@ -12,6 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @auth
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}
                     </x-nav-link>
@@ -19,6 +20,7 @@
                     <x-nav-link href="/profile" :active="request()->routeIs('profile.show')">
                         {{ __('Profile') }}
                     </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
@@ -66,7 +68,7 @@
             <!-- Hamburger -->
             <div class="flex items-center -mr-2 sm:hidden">
                 <button @click="open = ! open"
-                        class="inline-flex justify-center items-center p-2 text-gray-400 rounded-md transition duration-150 ease-in-out hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
+                        class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
                     <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
                               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
