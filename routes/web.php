@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function(){
 $user = Auth::user();
 
 Route::view('/secretpage', 'secretpage')
-    ->middleware('verifiedEmail')
+    ->middleware('verified')
     ->name('secretpage')
     ;
 
