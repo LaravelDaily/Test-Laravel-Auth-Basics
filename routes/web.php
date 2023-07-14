@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
 // Task: profile functionality should be available only for logged-in users
-Route::group(['middleware' => 'auth'], function(){
+Route::middleware('auth')->group(function(){
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
@@ -33,14 +33,13 @@ Route::group(['middleware' => 'auth'], function(){
 $user = Auth::user();
 
 Route::view('/secretpage', 'secretpage')
-    ->middleware('verifiedEmail')
     ->name('secretpage')
-    ;
+    ->middleware('verified');
 
 // Task: this "/verysecretpage" URL should ask user for verifying their password once again
 // You need to add some middleware here
 Route::view('/verysecretpage', 'verysecretpage')
-    ->middleware('password.confirm')
-    ->name('verysecretpage');
+    ->name('verysecretpage')
+    ->middleware('password.confirm');
 
 require __DIR__.'/auth.php';
