@@ -29,7 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="@php \Illuminate\Support\Facades\Auth::user()->name @endphp"
                                      required />
                         </div>
 
@@ -40,6 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
+                                     value="@php \Illuminate\Support\Facades\Auth::user()->email @endphp"
                                      value="???"
                                      required />
                         </div>
