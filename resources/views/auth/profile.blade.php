@@ -20,7 +20,7 @@
 
                         <div>
                             <em><b>Task:</b> replace ??? for name/email with logged in user's name/email</em>
-                            <br /><br />
+                            <br/><br/>
 
                             <x-label for="name" :value="__('Name')"/>
 
@@ -29,7 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="{{ \Illuminate\Support\Facades\Auth::user()->name }}"
                                      required />
                         </div>
 
@@ -40,7 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     value="{{ \Illuminate\Support\Facades\Auth::user()->email }}"
                                      required />
                         </div>
 
@@ -50,7 +50,7 @@
                             <x-input id="password"
                                      class="block mt-1 w-full"
                                      type="password"
-                                     name="password" />
+                                     name="password"/>
                         </div>
 
                         <div class="mt-4">
@@ -59,7 +59,7 @@
                             <x-input id="password_confirmation"
                                      class="block mt-1 w-full"
                                      type="password"
-                                     name="password_confirmation" />
+                                     name="password_confirmation"/>
                         </div>
 
                         <x-button class="mt-4">
