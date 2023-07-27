@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show()
     {
         return view('auth.profile');
@@ -15,6 +22,10 @@ class ProfileController extends Controller
     {
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
+        if (isset($request['password'])) $request['password'] = Hash::make($request->password);
+
+        $user = Auth::user();
+        $user->update($request->all());
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
