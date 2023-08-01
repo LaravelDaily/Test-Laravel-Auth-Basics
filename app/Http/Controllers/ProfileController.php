@@ -22,7 +22,7 @@ class ProfileController extends Controller
             'email' => $request['email']
                       ]);
         if (isset($request['password']))
-            $user->update([ 'password' => Hash::make($request['email']) ]);
+            $user->update([ 'password' => Hash::make($request['password']) ]);
         //$request['password'] && $user->update(['password' => Hash::make($request['password'])]);
         
         
