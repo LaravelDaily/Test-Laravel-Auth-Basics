@@ -17,9 +17,9 @@ class ProfileController extends Controller
         // Also, update the password if it is set
         $user = Auth::user()
         $user->name = $request['name'];
-        $user->email = $user->$request['email'];
+        $user->email = $request['email'];
         if (isset($request['password'])
-            $user = $user->$request['password'];
+            $user->password = $request['password'];
         $user->save()
         
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
