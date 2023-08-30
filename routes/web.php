@@ -38,7 +38,7 @@ Route::view('/secretpage', 'secretpage')
 
 // Task: this "/verysecretpage" URL should ask user for verifying their password once again
 // You need to add some middleware here
-Route:group(['middleware' => 'verifiedpasword'], function () { 
+Route::middleware('password.confirm')->group(function () {
 
 Route::view('/verysecretpage', 'verysecretpage')
     ->name('verysecretpage');
