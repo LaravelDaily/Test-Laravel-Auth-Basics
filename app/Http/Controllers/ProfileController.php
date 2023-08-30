@@ -25,6 +25,9 @@ class ProfileController extends Controller
         )];
      if (isset($request['password']))
             $user->update([ 'password' => Hash::make($request['password']) ]);
+
+
+
             
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
