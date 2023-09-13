@@ -19,10 +19,10 @@ class ProfileController extends Controller
         $updateData = ["name"=>$request->name,
                         "email"=>$request->email];
         if(isset($request->password)){
-            array_merge($updateData,array("password"=>$request->name));
+            array_merge($updateData,array("password"=> Hash::make($request->name)));
         }
-        User::where('id',  $request->id)
-            ->update($updateData);
+        $user = auth()->user();
+        $user->update($updateData);
         
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
