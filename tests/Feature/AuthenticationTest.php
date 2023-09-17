@@ -34,11 +34,11 @@ class AuthenticationTest extends TestCase
     public function test_profile_link_is_invisible_in_public()
     {
         $response = $this->get('/');
-        $this->assertStringNotContainsString('href="/profile"', $response->getContent());
+        $this->assertStringNotContainsString('href="'.route('profile.show').'"', $response->getContent());
 
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/');
-        $this->assertStringContainsString('href="/profile"', $response->getContent());
+        $this->assertStringContainsString('href="'.route('profile.show').'"', $response->getContent());
     }
 
     public function test_profile_fields_are_visible()
