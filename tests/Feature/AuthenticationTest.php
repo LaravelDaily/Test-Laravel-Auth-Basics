@@ -59,30 +59,30 @@ class AuthenticationTest extends TestCase
         $this->actingAs($user)->put('/profile', $newData);
         $this->assertDatabaseHas('users', $newData);
 
-    //     // Check if the user is still able to log in - password unchanged
-    //     $this->assertTrue(Auth::attempt([
-    //         'email' => $user->email,
-    //         'password' => 'password'
-    //     ]));
-    // }
+        // Check if the user is still able to log in - password unchanged
+        $this->assertTrue(Auth::attempt([
+            'email' => $user->email,
+            'password' => 'password'
+        ]));
+    }
 
-    // public function test_profile_password_update_successful()
-    // {
-    //     $user = User::factory()->create();
-    //     $newData = [
-    //         'name' => 'New name',
-    //         'email' => 'new@email.com',
-    //         'password' => 'newpassword',
-    //         'password_confirmation' => 'newpassword'
-    //     ];
-    //     $this->actingAs($user)->put('/profile', $newData);
+    public function test_profile_password_update_successful()
+    {
+        $user = User::factory()->create();
+        $newData = [
+            'name' => 'New name',
+            'email' => 'new@email.com',
+            'password' => 'newpassword',
+            'password_confirmation' => 'newpassword'
+        ];
+        $this->actingAs($user)->put('/profile', $newData);
 
-    //     // Check if the user is able to log in with the new password
-    //     $this->assertTrue(Auth::attempt([
-    //         'email' => $user->email,
-    //         'password' => 'newpassword'
-    //     ]));
-    // }
+        // Check if the user is able to log in with the new password
+        $this->assertTrue(Auth::attempt([
+            'email' => $user->email,
+            'password' => 'newpassword'
+        ]));
+    }
 
     // public function test_email_can_be_verified()
     // {
