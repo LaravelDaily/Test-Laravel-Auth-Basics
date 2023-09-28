@@ -18,9 +18,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
-Route::get('/email/verify', function () {
-   return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+//Route::get('/email/verify', function () {
+//   return view('auth.verify-email');
+//})->middleware('auth')->name('verification.notice');
 // Task: profile functionality should be available only for logged-in users
 Route::middleware('auth')->group(function () {
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
