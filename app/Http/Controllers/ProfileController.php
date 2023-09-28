@@ -15,6 +15,15 @@ class ProfileController extends Controller
     {
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
+        $user = auth()->user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if (isset($request->password, $request->password_confirmation)) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
