@@ -84,74 +84,74 @@ class AuthenticationTest extends TestCase
         ]));
     }
 
-    // public function test_email_can_be_verified()
-    // {
-    //     $newData = [
-    //         'name' => 'New name',
-    //         'email' => 'new@email.com',
-    //         'password' => 'newpassword',
-    //         'password_confirmation' => 'newpassword'
-    //     ];
-    //     $response = $this->post('/register', $newData);
-    //     $response->assertRedirect('/');
+    public function test_email_can_be_verified()
+    {
+        $newData = [
+            'name' => 'New name',
+            'email' => 'new@email.com',
+            'password' => 'newpassword',
+            'password_confirmation' => 'newpassword'
+        ];
+        $response = $this->post('/register', $newData);
+        $response->assertRedirect('/');
 
-    //     $response = $this->get('/secretpage');
-    //     $response->assertRedirect('/verify-email');
+        $response = $this->get('/secretpage');
+        $response->assertRedirect('/verify-email');
 
-    //     $user = User::factory()->create([
-    //         'email_verified_at' => null,
-    //     ]);
+        $user = User::factory()->create([
+            'email_verified_at' => null,
+        ]);
 
-    //     Event::fake();
+        Event::fake();
 
-    //     $verificationUrl = URL::temporarySignedRoute(
-    //         'verification.verify',
-    //         now()->addMinutes(60),
-    //         ['id' => $user->id, 'hash' => sha1($user->email)]
-    //     );
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            ['id' => $user->id, 'hash' => sha1($user->email)]
+        );
 
-    //     $this->actingAs($user)->get($verificationUrl);
-    //     Event::assertDispatched(Verified::class);
-    //     $this->assertTrue($user->fresh()->hasVerifiedEmail());
+        $this->actingAs($user)->get($verificationUrl);
+        Event::assertDispatched(Verified::class);
+        $this->assertTrue($user->fresh()->hasVerifiedEmail());
 
-    //     $response = $this->get('/secretpage');
-    //     $response->assertOk();
-    // }
+        $response = $this->get('/secretpage');
+        $response->assertOk();
+    }
 
-    // public function test_password_confirmation_page()
-    // {
-    //     $user = User::factory()->create();
-    //     $response = $this->actingAs($user)->get('/verysecretpage');
-    //     $response->assertRedirect('/confirm-password');
+    public function test_password_confirmation_page()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get('/verysecretpage');
+        $response->assertRedirect('/confirm-password');
 
-    //     $response = $this->actingAs($user)->post('/confirm-password', [
-    //         'password' => 'password',
-    //     ]);
+        $response = $this->actingAs($user)->post('/confirm-password', [
+            'password' => 'password',
+        ]);
 
-    //     $response->assertRedirect();
-    //     $response->assertSessionHasNoErrors();
-    // }
+        $response->assertRedirect();
+        $response->assertSessionHasNoErrors();
+    }
 
-    // public function test_password_at_least_one_uppercase_lowercase_letter()
-    // {
-    //     $user = [
-    //         'name' => 'New name',
-    //         'email' => 'new@email.com',
-    //     ];
+    public function test_password_at_least_one_uppercase_lowercase_letter()
+    {
+        $user = [
+            'name' => 'New name',
+            'email' => 'new@email.com',
+        ];
 
-    //     $invalidPassword = '12345678';
-    //     $validPassword = 'a12345678';
+        $invalidPassword = '12345678';
+        $validPassword = 'a12345678';
 
-    //     $this->post('/register', $user + [
-    //         'password' => $invalidPassword,
-    //         'password_confirmation' => $invalidPassword
-    //     ]);
-    //     $this->assertDatabaseMissing('users', $user);
+        $this->post('/register', $user + [
+            'password' => $invalidPassword,
+            'password_confirmation' => $invalidPassword
+        ]);
+        $this->assertDatabaseMissing('users', $user);
 
-    //     $this->post('/register', $user + [
-    //             'password' => $validPassword,
-    //             'password_confirmation' => $validPassword
-    //         ]);
-    //     $this->assertDatabaseHas('users', $user);
-    // }
+        $this->post('/register', $user + [
+                'password' => $validPassword,
+                'password_confirmation' => $validPassword
+            ]);
+        $this->assertDatabaseHas('users', $user);
+    }
 }
