@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('My profile') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
                     <x-validation-errors class="mb-4" :errors="$errors"/>
@@ -26,10 +26,10 @@
 
                             {{-- Task: replace ??? for name/email with logged in user's name/email --}}
                             <x-input id="name"
-                                     class="block mt-1 w-full"
+                                     class="block w-full mt-1"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="{{ Auth::user()->name }}"
                                      required />
                         </div>
 
@@ -37,10 +37,10 @@
                             <x-label for="email" :value="__('Email')"/>
 
                             <x-input id="email"
-                                     class="block mt-1 w-full"
+                                     class="block w-full mt-1"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     value="{{ Auth::user()->email }}"
                                      required />
                         </div>
 
@@ -48,7 +48,7 @@
                             <x-label for="password" :value="__('New password (if you want to change it)')"/>
 
                             <x-input id="password"
-                                     class="block mt-1 w-full"
+                                     class="block w-full mt-1"
                                      type="password"
                                      name="password" />
                         </div>
@@ -57,7 +57,7 @@
                             <x-label for="password_confirmation" :value="__('New password confirmation')"/>
 
                             <x-input id="password_confirmation"
-                                     class="block mt-1 w-full"
+                                     class="block w-full mt-1"
                                      type="password"
                                      name="password_confirmation" />
                         </div>
