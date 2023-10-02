@@ -22,12 +22,12 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('login');
 
-        $response = $this->put('/profile');
+        $response = $this->put("/profile/1");
         $response->assertStatus(302);
         $response->assertRedirect('login');
 
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/profile');
+        $response = $this->actingAs($user)->get("/profile");
         $response->assertOk();
     }
 
@@ -52,19 +52,22 @@ class AuthenticationTest extends TestCase
     public function test_profile_name_email_update_successful()
     {
         $user = User::factory()->create();
+
         $newData = [
             'name' => 'New name',
             'email' => 'new@email.com'
         ];
-        $this->actingAs($user)->put('/profile', $newData);
+        $this->actingAs($user)->put("/profile/1", $newData);
         $this->assertDatabaseHas('users', $newData);
 
+        $user->refresh();
         // Check if the user is still able to log in - password unchanged
         $this->assertTrue(Auth::attempt([
             'email' => $user->email,
             'password' => 'password'
         ]));
     }
+
 
     public function test_profile_password_update_successful()
     {
@@ -75,8 +78,10 @@ class AuthenticationTest extends TestCase
             'password' => 'newpassword',
             'password_confirmation' => 'newpassword'
         ];
-        $this->actingAs($user)->put('/profile', $newData);
+        //$this->actingAs($user)->put('/profile', $newData);
+        $this->actingAs($user)->put("/profile/1", $newData);
 
+        $user->refresh();
         // Check if the user is able to log in with the new password
         $this->assertTrue(Auth::attempt([
             'email' => $user->email,

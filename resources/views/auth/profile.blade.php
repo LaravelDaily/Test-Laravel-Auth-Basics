@@ -14,8 +14,8 @@
 
                     <x-alert.success></x-alert.success>
 
-                    <form action="{{ route('profile.update') }}" method="POST">
-                        @csrf
+                    <form action="{{ route('profile.update', ['user' => Auth::user()->id]) }}" method="POST">
+                    @csrf
                         @method('PUT')
 
                         <div>
@@ -29,7 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="{{Auth::user()->name}}"
                                      required />
                         </div>
 
@@ -40,7 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     value="{{Auth::user()->email}}"
                                      required />
                         </div>
 

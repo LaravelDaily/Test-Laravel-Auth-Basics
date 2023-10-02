@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  smtp:
+    platform: linux/x86_64
+    image: mailhog/mailhog
+    container_name: docker-workspace-smtp
+    logging:
+      driver: 'none'
+    ports:
+      - "8003:1025"
+      - "8100:8025"
+    networks:
+      - docker_workspace_network
+networks:
+  docker_workspace_network:
+    driver: bridge
