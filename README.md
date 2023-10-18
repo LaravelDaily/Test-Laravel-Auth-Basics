@@ -26,7 +26,7 @@ Good luck!
 
 ---
 
-## Task 1. Routes Protected by Auth.
+## Task 1. Routes Protected by Auth. +
 
 File `routes/web.php`: profile functionality URLs should be available only for logged-in users.
 
@@ -34,7 +34,7 @@ Test method `test_profile_routes_are_protected_from_public()`.
 
 ---
 
-## Task 2. Link Visible to Logged-in Users.
+## Task 2. Link Visible to Logged-in Users. +
 
 File `resources/views/layouts/navigation.blade.php`: the "Profile" link should be visible only to logged-in users.
 
@@ -42,7 +42,7 @@ Test method `test_profile_link_is_invisible_in_public()`.
 
 ---
 
-## Task 3. Profile Fields.
+## Task 3. Profile Fields. +
 
 File `resources/views/auth/profile.blade.php`: replace "???" values for name/email with logged-in user's name/email.
 
@@ -50,7 +50,7 @@ Test method `test_profile_fields_are_visible()`.
 
 ---
 
-## Task 4. Profile Update.
+## Task 4. Profile Update. +
 
 File `app/Http/Controllers/ProfileController.php`: fill in the method `update()` with the code to update the user's name and email.
 If the password is filled in, also update that.
@@ -59,7 +59,7 @@ Test methods: `test_profile_name_email_update_successful()` and `test_profile_pa
 
 ---
 
-## Task 5. Email Verification.
+## Task 5. Email Verification. +
 
 Make the URL `/secretpage` available only to those who verified their email.
 You need to make changes to two files.
@@ -71,7 +71,7 @@ Test method: `test_email_can_be_verified()`.
 
 ---
 
-## Task 6. Password Confirmation.
+## Task 6. Password Confirmation. +
 
 Make the URL `/verysecretpage` redirect to a page to re-enter their password once again.
 In file `routes/web.php` add a Middleware to that URL.
@@ -80,7 +80,7 @@ Test method: `test_password_confirmation_page()`.
 
 ---
 
-## Task 7. Password with Letters.
+## Task 7. Password with Letters. +
 
 By default, registration form requires password with at least 8 characters.
 Add a validation rule so that password must have at least one letter, no matter uppercase or lowercase.
