@@ -29,7 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="{{auth()->user()->name}}"
                                      required />
                         </div>
 
@@ -40,7 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     value="{{auth()->user()->email}}"
                                      required />
                         </div>
 
@@ -61,6 +61,8 @@
                                      type="password"
                                      name="password_confirmation" />
                         </div>
+
+                        <x-input type="hidden" name="row_id" value="{{auth()->user()->id}}"/>
 
                         <x-button class="mt-4">
                             {{ __('Submit') }}
