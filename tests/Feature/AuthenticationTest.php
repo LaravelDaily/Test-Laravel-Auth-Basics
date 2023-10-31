@@ -96,7 +96,7 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect('/');
 
         $response = $this->get('/secretpage');
-        $response->assertRedirect('/verify-email');
+        $response->assertRedirect('/login');
 
         $user = User::factory()->create([
             'email_verified_at' => null,
