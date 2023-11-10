@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -16,9 +17,12 @@
                         {{ __('Users') }}
                     </x-nav-link>
                     {{-- Task: this "Profile" link should be visible only to logged-in users --}}
+                  @auth()
                     <x-nav-link href="/profile" :active="request()->routeIs('profile.show')">
+
                         {{ __('Profile') }}
                     </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
