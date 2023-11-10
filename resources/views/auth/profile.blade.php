@@ -1,3 +1,4 @@
+@php use App\Models\User;use Illuminate\Support\Facades\Auth; @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -20,7 +21,7 @@
 
                         <div>
                             <em><b>Task:</b> replace ??? for name/email with logged in user's name/email</em>
-                            <br /><br />
+                            <br/><br/>
 
                             <x-label for="name" :value="__('Name')"/>
 
@@ -29,8 +30,8 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
-                                     required />
+                                     value="{{ auth()->user()->name  }}"
+                                     required/>
                         </div>
 
                         <div class="mt-4">
@@ -40,8 +41,8 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
-                                     required />
+                                     value="{{ auth()->user()->email }}"
+                                     required/>
                         </div>
 
                         <div class="mt-4">
@@ -50,7 +51,7 @@
                             <x-input id="password"
                                      class="block mt-1 w-full"
                                      type="password"
-                                     name="password" />
+                                     name="password"/>
                         </div>
 
                         <div class="mt-4">
@@ -59,7 +60,7 @@
                             <x-input id="password_confirmation"
                                      class="block mt-1 w-full"
                                      type="password"
-                                     name="password_confirmation" />
+                                     name="password_confirmation"/>
                         </div>
 
                         <x-button class="mt-4">
