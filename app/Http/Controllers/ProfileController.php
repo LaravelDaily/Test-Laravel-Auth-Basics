@@ -19,12 +19,15 @@ class ProfileController extends Controller
 
         $user=User::find(auth()->user()->id);
         
-        $user->name=$request->name;
-        $user->email=$request->email;
+        
         if($request->has('password')){
             $user->password=$request->password;
         }
-        $user->save();
+        $user->update([
+                      'name'=>$request->name,
+                      'email'=>$request->email,
+                      'password'=>$user->password
+        ]);
 
         
 
