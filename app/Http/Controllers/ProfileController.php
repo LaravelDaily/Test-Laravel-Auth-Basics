@@ -24,7 +24,7 @@ class ProfileController extends Controller
         ]);
 
         if($request->filled('password')){
-            $uesr->update([
+            $user->update([
                           'password'=> Hash::make($request->password)
             ]);
         }
