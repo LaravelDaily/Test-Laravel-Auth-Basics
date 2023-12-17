@@ -19,9 +19,9 @@ class ProfileController extends Controller
         $user=$request->user();
         $user->update($request->validated());
 
-        // if($request->filled('password')){
-        //     $user->update(['password'=>Hash::make($request->password)]);
-        // }
+        if($request->filled('password')){
+            $user->update(['password'=>Hash::make($request->password)]);
+        }
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
