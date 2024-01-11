@@ -11,17 +11,19 @@
                 </div>
 
                 <!-- Navigation Links -->
-                @auth
+            
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}
                     </x-nav-link>
                     {{-- Task: this "Profile" link should be visible only to logged-in users --}}
-                    <x-nav-link href="/profile" :active="request()->routeIs('profile.show')">
-                        {{ __('Profile') }}
-                    </x-nav-link>
+                    @auth
+                        <x-nav-link href="/profile" :active="request()->routeIs('profile.show')">
+                            {{ __('Profile') }}
+                        </x-nav-link>
+                    @endauth
                 </div>
-                @endauth
+            
             </div>
 
             <!-- Settings Dropdown -->
