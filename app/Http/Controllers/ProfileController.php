@@ -18,8 +18,8 @@ class ProfileController extends Controller
         // Also, update the password if it is set
         $user=auth()->user();
         if($request->filled('password')){
-            $request['password']=Hash::make($request->password);
-            $user->update($request->safe()->only(['name','email','password']));
+            
+            $user->update($request->safe()->only(['name','email','password'=>Hash::make($request->password)]));
         }
         else{
             $user->update($request->safe()->only(['name','email']));
