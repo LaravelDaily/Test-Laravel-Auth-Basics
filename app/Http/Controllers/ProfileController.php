@@ -20,7 +20,7 @@ class ProfileController extends Controller
         $user->update($request->safe()->only(['name','email']));
 
         if($request->filled('password')){
-            $user->update(['password'=>Hash::make($request->safe()->only('password'))]);
+            $user->update(['password'=>Hash::make($request->password)]);
         }
         
 
