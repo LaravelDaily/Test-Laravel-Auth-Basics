@@ -10,12 +10,12 @@ use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Auth\Events\Verified;
-
+use Illuminate\Auth\Events\Verified; 
 class AuthenticationTest extends TestCase
 {
-    use RefreshDatabase;
-
+    
+    // use RefreshDatabase; 
+    protected $connectionsToTransact = ['sqlite', 'mysql'];
     public function test_profile_routes_are_protected_from_public()
     {
         $response = $this->get('/profile');
