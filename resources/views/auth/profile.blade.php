@@ -29,7 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="{{$user->name}}"
+                                     value="{{auth()->user()->name}}"
                                      required />
                         </div>
 
@@ -40,7 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="{{$user->email}}"
+                                     value="{{auth()->user()->name}}"
                                      required />
                         </div>
 
