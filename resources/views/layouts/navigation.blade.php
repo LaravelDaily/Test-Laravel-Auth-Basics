@@ -20,7 +20,7 @@
                     <x-nav-link href="/profile" :active="request()->routeIs('profile.show')">
                         {{ __('Profile') }}
                     </x-nav-link>
-                    @endauth 
+                    @endauth
                 </div>
             </div>
 
