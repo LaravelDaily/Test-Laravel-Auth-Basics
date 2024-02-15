@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Validation\Rules;
 
 class ProfileController extends Controller
 {
@@ -16,7 +17,7 @@ class ProfileController extends Controller
 
         $validated = $request->validate([
             'current_password' => ['bail', 'nullable', 'current_password'],
-            'password' => ['bail', 'nullable', Rules\Password::numbers()->mixedCase(), 'confirmed'],
+            'password' => ['bail', 'nullable', Rules\Password::mixedCase()->numbers(), 'confirmed'],
         ]);
 
         $request->user()->fill($request->validated());
