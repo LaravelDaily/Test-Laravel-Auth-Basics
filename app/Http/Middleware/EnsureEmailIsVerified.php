@@ -1,3 +1,4 @@
+<?php
 use Closure;
 
 class EnsureEmailIsVerified
@@ -11,3 +12,4 @@ class EnsureEmailIsVerified
         return $next($request);
     }
 }
+>
