@@ -37,6 +37,6 @@ Route::view('/secretpage', 'secretpage')
 Route::view('/verysecretpage', 'verysecretpage')
     // ->middleware([\App\Http\Middleware\VerifyPassword::class])
     ->name('verysecretpage')
-    ->middleware(password.confirm);
+    ->middleware('password.confirm');
 
 require __DIR__.'/auth.php';
