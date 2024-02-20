@@ -21,8 +21,8 @@ Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->nam
 
 // Task: profile functionality should be available only for logged-in users
 Route::middleware('auth')->group(function () {
-    Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-    Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
                                    
 // Task: this "/secretpage" URL should be visible only for those who VERIFIED their email
