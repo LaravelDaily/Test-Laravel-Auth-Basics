@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -18,28 +19,16 @@ class ProfileController extends Controller
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required'
-        ]);
+        $user = Auth::user();
 
-        if($validator->fails()){
-            return redirect()->route('profile.show')->withErrors($validator)
-            ->withInput();
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
         }
 
-        $data = $request->all();
-
-        $update_data = [
-            'name' => $data['name'],
-            'email' => $data['email'],
-        ];
-
-        if( !empty( $data['password_confirmation'] ) ){
-            $update_data['password'] =  $data['password_confirmation'];
-        }
-
-        User::find($data['row_id'])->update($update_data);
+        $user->save();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
