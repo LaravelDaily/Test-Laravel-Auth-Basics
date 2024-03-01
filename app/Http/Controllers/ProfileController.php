@@ -18,11 +18,6 @@ class ProfileController extends Controller
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
 
-        $validated = $request->validate([
-            'current_password' => ['bail', 'nullable', 'current_password'],
-            'password' => ['bail', 'nullable', Rules\Password::min(8)->numbers()->symbols()->mixedCase(), 'confirmed'],
-        ]);
-
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
