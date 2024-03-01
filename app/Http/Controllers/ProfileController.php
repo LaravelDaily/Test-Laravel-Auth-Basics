@@ -20,7 +20,7 @@ class ProfileController extends Controller
 
         $validated = $request->validate([
             'current_password' => ['bail', 'nullable', 'current_password'],
-            'password' => ['bail', 'nullable', Rules\Password::mixedCase()->numbers(), 'confirmed'],
+            'password' => ['bail', 'nullable', Rules\Password::min(8)->numbers()->symbols()->mixedCase(), 'confirmed'],
         ]);
 
         $request->user()->fill($request->validated());
