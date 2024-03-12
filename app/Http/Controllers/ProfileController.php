@@ -23,7 +23,7 @@ class ProfileController extends Controller
         if($request->filled('password')){
             $user->update([
                           'password'=>Hash::make($request->password)
-            ])
+            ]);
         }
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
