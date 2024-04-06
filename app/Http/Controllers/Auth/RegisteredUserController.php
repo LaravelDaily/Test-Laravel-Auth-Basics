@@ -33,12 +33,11 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        // Task: change validation rule to include at least one letter
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+$request->validate([
+    'name' => ['required', 'string', 'max:255'],
+    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    'password' => ['required', 'confirmed', Rules\Password::defaults(), 'regex:/[A-Za-z]/'],
+]);
 
         $user = User::create([
             'name' => $request->name,
