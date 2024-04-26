@@ -4,7 +4,7 @@
             {{ __('My profile') }}
         </h2>
     </x-slot>
-
+{{--@dd(auth()->user()->name)--}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,7 +29,7 @@
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     :value="auth()->user()->name"
                                      required />
                         </div>
 
@@ -40,7 +40,7 @@
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     :value="auth()->user()->email"
                                      required />
                         </div>
 
