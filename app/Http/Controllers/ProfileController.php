@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -13,9 +14,17 @@ class ProfileController extends Controller
 
     public function update(ProfileUpdateRequest $request)
     {
-        // Task: fill in the code here to update name and email
-        // Also, update the password if it is set
+        $user = auth()->user();
+        
+        if($request->password){
+            $user->password = bcrypt($request->password);
+        }
 
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->save();
+        
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
 }
