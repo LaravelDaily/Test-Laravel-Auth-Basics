@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+*.bat
 .env
 .env.backup
 .env.production
