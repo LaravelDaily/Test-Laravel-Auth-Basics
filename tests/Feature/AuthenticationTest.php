@@ -51,6 +51,7 @@ class AuthenticationTest extends TestCase
 
     public function test_profile_name_email_update_successful()
     {
+        $this->withoutExceptionHandling();
         $user = User::factory()->create();
         $newData = [
             'name' => 'New name',
