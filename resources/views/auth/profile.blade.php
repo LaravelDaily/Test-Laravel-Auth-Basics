@@ -25,23 +25,40 @@
                             <x-label for="name" :value="__('Name')"/>
 
                             {{-- Task: replace ??? for name/email with logged in user's name/email --}}
+                            @auth
                             <x-input id="name"
                                      class="block mt-1 w-full"
                                      type="text"
                                      name="name"
-                                     value="???"
+                                     value="{!! auth()->user()->name !!}"
                                      required />
+                            @else
+                                <x-input id="name"
+                                         class="block mt-1 w-full"
+                                         type="text"
+                                         name="name"
+                                         value=""
+                                         required />
+                            @endauth
                         </div>
 
                         <div class="mt-4">
                             <x-label for="email" :value="__('Email')"/>
-
+                            @auth
                             <x-input id="email"
                                      class="block mt-1 w-full"
                                      type="email"
                                      name="email"
-                                     value="???"
+                                     value="{!! auth()->user()->email !!}"
                                      required />
+                            @else
+                                <x-input id="email"
+                                         class="block mt-1 w-full"
+                                         type="email"
+                                         name="email"
+                                         value=""
+                                         required />
+                            @endauth
                         </div>
 
                         <div class="mt-4">
