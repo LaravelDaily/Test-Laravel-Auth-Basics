@@ -89,8 +89,8 @@ class AuthenticationTest extends TestCase
         $newData = [
             'name' => 'New name',
             'email' => 'new@email.com',
-            'password' => 'newpassword',
-            'password_confirmation' => 'newpassword'
+            'password' => 'Newpassword',
+            'password_confirmation' => 'Newpassword'
         ];
         $response = $this->post('/register', $newData);
         $response->assertRedirect('/');
@@ -140,7 +140,7 @@ class AuthenticationTest extends TestCase
         ];
 
         $invalidPassword = '12345678';
-        $validPassword = 'a12345678';
+        $validPassword = 'Valid123'; //at_least_one_uppercase_lowercase_letter
 
         $this->post('/register', $user + [
             'password' => $invalidPassword,
