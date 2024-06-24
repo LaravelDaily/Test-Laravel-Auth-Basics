@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
 
-class ProfileController extends Controller
-{
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Hash;
+
+class ProfileController extends Controller {
+
     public function show()
     {
         return view('auth.profile');
@@ -15,6 +17,13 @@ class ProfileController extends Controller
     {
         // Task: fill in the code here to update name and email
         // Also, update the password if it is set
+
+        auth()->user()->update(array_filter([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => ($request->has('password'))
+                ? Hash::make($request->password) : '',
+        ]));
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
