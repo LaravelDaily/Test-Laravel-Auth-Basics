@@ -140,7 +140,7 @@ class AuthenticationTest extends TestCase
         ];
 
         $invalidPassword = '12345678';
-        $validPassword = 'a12345678';
+        $validPassword = 'aA12345678';
 
         $this->post('/register', $user + [
             'password' => $invalidPassword,
