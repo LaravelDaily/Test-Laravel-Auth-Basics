@@ -45,8 +45,8 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/profile');
-        $this->assertStringContainsString('value="'.$user->name.'"', $response->getContent());
-        $this->assertStringContainsString('value="'.$user->email.'"', $response->getContent());
+        $this->assertStringContainsString('value="' . $user->name . '"', $response->getContent());
+        $this->assertStringContainsString('value="' . $user->email . '"', $response->getContent());
     }
 
     public function test_profile_name_email_update_successful()
@@ -149,9 +149,9 @@ class AuthenticationTest extends TestCase
         $this->assertDatabaseMissing('users', $user);
 
         $this->post('/register', $user + [
-                'password' => $validPassword,
-                'password_confirmation' => $validPassword
-            ]);
+            'password' => $validPassword,
+            'password_confirmation' => $validPassword
+        ]);
         $this->assertDatabaseHas('users', $user);
     }
 }
