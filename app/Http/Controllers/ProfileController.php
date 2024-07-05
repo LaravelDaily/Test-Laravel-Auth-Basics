@@ -17,11 +17,11 @@ class ProfileController extends Controller
         // Also, update the password if it is set
         $data = $request->validated();
 
-        if ($request->input('password')) {
+        if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
 
-        auth()->user()->update($data);
+        $request->user()->update($data);
 
         return redirect()->route('profile.show')->with('success', 'Profile updated.');
     }
