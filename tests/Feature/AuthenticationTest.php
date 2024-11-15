@@ -54,14 +54,14 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create();
         $newData = [
             'name' => 'New name',
-            'email' => 'new@email.com'
+            'email' => 'new@email.com' 
         ];
         $this->actingAs($user)->put('/profile', $newData);
         $this->assertDatabaseHas('users', $newData);
 
         // Check if the user is still able to log in - password unchanged
         $this->assertTrue(Auth::attempt([
-            'email' => $user->email,
+            'email' => $newData['email'],
             'password' => 'password'
         ]));
     }
@@ -79,7 +79,7 @@ class AuthenticationTest extends TestCase
 
         // Check if the user is able to log in with the new password
         $this->assertTrue(Auth::attempt([
-            'email' => $user->email,
+            'email' => 'new@email.com',
             'password' => 'newpassword'
         ]));
     }
@@ -140,7 +140,7 @@ class AuthenticationTest extends TestCase
         ];
 
         $invalidPassword = '12345678';
-        $validPassword = 'a12345678';
+        $validPassword = 'Aa12345678';
 
         $this->post('/register', $user + [
             'password' => $invalidPassword,
