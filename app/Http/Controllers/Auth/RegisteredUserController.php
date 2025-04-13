@@ -33,23 +33,44 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        // Task: change validation rule to include at least one letter
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
+        $validated = $this->validateRegistration($request);
+        
+        $user = $this->createUser($validated);
+        
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    /**
+     * Validate the registration request.
+     *
+     * @param Request $request
+     * @return array
+     */
+    private function validateRegistration(Request $request): array
+    {
+        return $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()->letters()],
+        ]);
+    }
+
+    /**
+     * Create a new user instance.
+     *
+     * @param array $data
+     * @return User
+     */
+    private function createUser(array $data): User
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
     }
 }
